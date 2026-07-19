@@ -4,8 +4,8 @@
 
 **Contribution Number:** 2  
 **Student:** Angelika S  
-**Repository:** Precogly  
-**Issue:** #203 - Data Flow: Cannot Link Data Assets to a Connection  
+**Repository:** https://github.com/precogly/precogly
+**Issue:** #203 https://github.com/precogly/precogly/issues/203
 **Status:** Phase I - Issue Selected
 
 ----
@@ -65,23 +65,34 @@ The operation appears to complete without errors, yet the selected Data Asset is
 ---
 
 ## Reproduction Process
-### Environment Setup
+## Environment Setup
+
+To be completed during Phase II after setting up the local development environment.
 
 
+## Setup Approach
 
-  
-### Setup Approach
+Planned for Phase II. I will first reproduce the issue locally before tracing the Data Asset linking functionality through the frontend and backend.
 
 
    
 
 ### Challenges Encountered
 
+At this stage, no implementation challenges have been encountered. The primary focus of Phase I is understanding the issue, reviewing the project structure, and planning the investigation for Phase II.
 
 
+## Steps to Reproduce
 
-### Steps to Reproduce
+According to the issue report:
 
+1. Create two components.
+2. Create a Data Flow between them.
+3. Open the Data Flow properties panel.
+4. Navigate to the Data Assets section.
+5. Click **Link Asset**.
+6. Attempt to link an existing Data Asset.
+7. Observe that the Data Asset is not associated with the Data Flow.
 
 
 
@@ -142,17 +153,30 @@ Run automated and manual tests to ensure the fix works without introducing regre
 
 
 
-  
 ### Week 7 Progress
+
+- Selected Issue #203.
+- Forked the repository.
+- Introduced myself on the GitHub issue.
+- Reviewed the issue requirements.
+- Analyzed the expected and current behavior.
+- Prepared an implementation plan for Phase II.
 
 
 
 
 ### Engineering Judgment (Stretch/Bonus)
 
-
+I plan to identify the root cause of the issue by tracing how Data Flows and Data Assets are connected throughout the application. My goal is to preserve the existing architecture while making the smallest change necessary to restore the intended functionality.
   
 **Next Steps:**
+
+- Set up the local development environment.
+- Reproduce the issue.
+- Identify the root cause.
+- Implement the fix.
+- Add automated tests.
+- Submit a pull request.
 
 
 
@@ -171,7 +195,9 @@ Run automated and manual tests to ensure the fix works without introducing regre
 
 
   
-**Diff scope verification:**
+## Issue Scope
+
+This issue is well-scoped for a first open-source contribution. It targets a single feature, has clear reproduction steps and expected behavior, and appears to require changes within a limited portion of the codebase without affecting unrelated functionality.
 
 
 
@@ -181,11 +207,13 @@ Run automated and manual tests to ensure the fix works without introducing regre
 
 ---
 
-## Pull Request
+**PR Link:**
 
-**PR Link:** 
+To be completed during Phase III.
 
 **PR Description:**
+
+To be completed during Phase III.
 
 
 
@@ -211,9 +239,12 @@ Testing:
 
 ### Technical Skills Gained
 
-
+Developed a deeper understanding of the problem domain and how Data Flows and Data Assets are expected to interact within a threat modeling platform.
 
 ### Challenges Overcome
+
+Interpreted the issue requirements and translated them into a structured implementation plan.
+
 
 
 
@@ -222,7 +253,11 @@ Testing:
 
 
 ---
-
 ## Resources Used
 
+- Precogly GitHub repository
+- GitHub Issue #203
+- Precogly CONTRIBUTING.md
+- Django documentation
+- Python documentation
 
