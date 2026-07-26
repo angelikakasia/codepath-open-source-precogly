@@ -8,8 +8,9 @@
 
 **Issue:** #203 https://github.com/precogly/precogly/issues/203
 
-**Status:** Phase I - Issue Selected
+**Fork** https://github.com/angelikakasia/precogly   ( Last time I received zero points for my fork because CodePath didn't notice my fork but it is there - done last week)
 
+**Status:** Phase II - 
 ----
 
 ## Why I Chose This Issue
@@ -36,12 +37,9 @@ Users can create a Data Flow between two components and access the **Link Asset*
 Although the option is visible and clickable, no relationship is created or saved. This prevents users from accurately documenting which Data Assets travel across specific Data Flows, reducing the effectiveness of the threat model.
 
 
-## Expected Behavior
+### Expected Behavior
 
-When a user clicks **Link Asset**, they should be able to select an existing Data Asset and successfully associate it with the selected Data Flow.
-
-The linked asset should be saved and displayed within the Data Flow properties.
-
+Selecting a Data Asset and clicking **Link** should associate the selected Data Asset with the Data Flow. The relationship should remain visible after saving and reopening the Data Flow.
 ## Acceptance Criteria
 
 - Users can successfully link an existing Data Asset to a Data Flow.
@@ -52,49 +50,62 @@ The linked asset should be saved and displayed within the Data Flow properties.
 
 
 
-## Current Behavior
+### Current Behavior
 
-The **Link Asset** option is available within the Data Flow properties panel, but selecting a Data Asset does not create or save the relationship.
+After selecting an existing Data Asset and clicking **Link**, the selected asset immediately disappears from the Data Flow properties panel. No relationship is created or saved between the Data Flow and the Data Asset.
 
-The operation appears to complete without errors, yet the selected Data Asset is never attached to the Data Flow and does not appear in the interface.
 
 
 ### Affected Components
-- Data Flow properties panel
-- Data Asset linking functionality
-- Backend relationship between Data Flows and Data Assets
-- API or service responsible for saving Data Flow relationships
+
+Based on the local investigation, the following components appear to be involved in the Data Asset linking workflow:
+
+- frontend/src/features/dfd-editor/components/panels/EdgeEditPanel.tsx
+- frontend/src/features/dfd-editor/components/panels/NodeEditPanel.tsx
+- frontend/src/features/threat-models/api/data-flow-assets.ts
+- frontend/src/features/dfd-editor/DFDEditor.tsx
+
+
 ---
 
 ## Reproduction Process
 ## Environment Setup
 
-To be completed during Phase II after setting up the local development environment.
+I followed the project's Docker-based development setup using the repository README instructions.
+
+The application was built and started successfully using Docker Compose. After the containers finished initializing and the seed data loaded, I logged in using the default development credentials provided by the project.
+
+Environment:
+- Docker Desktop
+- Docker Compose
+- React frontend
+- Django backend
 
 
 ## Setup Approach
 
-Planned for Phase II. I will first reproduce the issue locally before tracing the Data Asset linking functionality through the frontend and backend.
-
+I used the Docker development environment described in the project README rather than configuring the frontend and backend manually. This ensured my local environment matched the intended development setup.
 
    
-
 ### Challenges Encountered
 
-At this stage, no implementation challenges have been encountered. The primary focus of Phase I is understanding the issue, reviewing the project structure, and planning the investigation for Phase II.
+- Initial Docker image build took several minutes.
+- pip displayed a warning about running as the root user inside the container. This did not prevent the application from starting.
+- After the containers finished building, the seeded development account became available and the application loaded successfully.
 
+  
+### Steps to Reproduce
 
-## Steps to Reproduce
-
-According to the issue report:
-
-1. Create two components.
-2. Create a Data Flow between them.
-3. Open the Data Flow properties panel.
-4. Navigate to the Data Assets section.
-5. Click **Link Asset**.
-6. Attempt to link an existing Data Asset.
-7. Observe that the Data Asset is not associated with the Data Flow.
+1. Start the local development environment using Docker Compose.
+2. Log in using the seeded development account.
+3. Open an existing Threat Model or create a new one.
+4. Create a Human Actor, Process, Data Store, and System Actor.
+5. Create Data Flows between the components.
+6. Open System Context and define one or more Data Assets.
+7. Open a Data Flow.
+8. In the Data Assets section, select an existing Data Asset.
+9. Click **Link**.
+10. Observe that the selected Data Asset immediately disappears and is not associated with the Data Flow.
 
 
 
@@ -103,19 +114,33 @@ According to the issue report:
 
 ### Analysis
 
-**Root Cause:**
+### Root Cause (Hypothesis)
 
-Investigate how Data Assets are associated with Data Flows by reviewing the frontend request, backend API, database models, and service logic responsible for creating the relationship.
+The Link Asset user interface is present and allows selecting an existing Data Asset, but the relationship is not persisted after clicking Link.
+
+The failure likely occurs in either:
+
+- the React event handler responsible for submitting the selected Data Asset,
+- the API request in data-flow-assets.ts,
+- or the Django backend endpoint responsible for creating the Data Flow ↔ Data Asset relationship.
+
+This hypothesis will be verified during implementation.
 
 ### Proposed Solution
 
 Identify where the linking process fails and implement the necessary changes so that selected Data Assets are successfully associated with Data Flows and persist correctly.
 
 ### Implementation Plan
+### Understand
 
-**Understand:**
+Investigate how the Link Asset functionality is implemented by reviewing:
 
-Review the existing implementation for Data Flows, Data Assets, and the Link Asset functionality.
+- EdgeEditPanel.tsx
+- NodeEditPanel.tsx
+- DFDEditor.tsx
+- data-flow-assets.ts
+
+Trace how a selected Data Asset is passed from the React UI to the backend API and determine where the association fails.
 
 **Match:**
 
@@ -164,6 +189,14 @@ Run automated and manual tests to ensure the fix works without introducing regre
 - Analyzed the expected and current behavior.
 - Prepared an implementation plan for Phase II.
 
+### Week 8 Progress
+
+- Set up the project locally using Docker.
+- Successfully launched the React frontend and Django backend.
+- Reproduced Issue #203.
+- Confirmed that linked Data Assets disappear immediately after clicking Link.
+- Located the primary frontend files responsible for the Link Asset functionality.
+- Began tracing the Data Flow to Data Asset relationship through the frontend API layer.
 
 
 
@@ -171,30 +204,34 @@ Run automated and manual tests to ensure the fix works without introducing regre
 
 I plan to identify the root cause of the issue by tracing how Data Flows and Data Assets are connected throughout the application. My goal is to preserve the existing architecture while making the smallest change necessary to restore the intended functionality.
   
-**Next Steps:**
+**Next Steps**
 
-- Set up the local development environment.
-- Reproduce the issue.
-- Identify the root cause.
+- Identify the frontend component responsible for Link Asset.
+- Trace the API request from React to the Django backend.
+- Locate where the Data Flow–Data Asset relationship should be created.
 - Implement the fix.
-- Add automated tests.
+- Add tests.
 - Submit a pull request.
 
 
-
 **Files modified:**
+
+None (Phase II focused on environment setup, reproduction, and investigation.)
 
 
   
 **Branch:**
 
+branch-203
 
 
 **Repository:**
 
+https://github.com/angelikakasia/precogly
 
 **Key commits:**
 
+None (implementation begins in Phase III).
 
   
 ## Issue Scope
@@ -202,8 +239,9 @@ I plan to identify the root cause of the issue by tracing how Data Flows and Dat
 This issue is well-scoped for a first open-source contribution. It targets a single feature, has clear reproduction steps and expected behavior, and appears to require changes within a limited portion of the codebase without affecting unrelated functionality.
 
 
-
 **Approach decisions:**
+
+I chose to reproduce the issue before investigating the codebase so I could confirm the bug and better understand the expected behavior before proposing a fix.
 
 
 
@@ -237,16 +275,15 @@ Testing:
 
 ## Learnings & Reflections
 
-
+It is easier to work when the instructions are clear.
 
 ### Technical Skills Gained
 
-Developed a deeper understanding of the problem domain and how Data Flows and Data Assets are expected to interact within a threat modeling platform.
+Developed a deeper understanding of how Data Flows, Data Assets, and the React/Django architecture interact within Precogly. I also gained experience setting up and debugging a Docker-based open-source development environment.
 
 ### Challenges Overcome
 
-Interpreted the issue requirements and translated them into a structured implementation plan.
-
+Successfully configured the local Docker environment, reproduced the reported issue, and narrowed the investigation to the frontend components responsible for the Link Asset workflow.
 
 
 
