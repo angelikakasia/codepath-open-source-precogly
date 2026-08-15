@@ -1,4 +1,4 @@
-CodePath Open Source Capstone — Precogly
+# CodePath Open Source Capstone — Precogly
 
 ## Contribution 2: Fix Data Flow Asset Linking
 
@@ -25,6 +25,18 @@ Precogly is an OWASP threat-modeling project that supports structured approaches
 
 The issue also required understanding the boundary between a React interface, a Django REST API, and tenant-aware database queries. That made it a good opportunity to improve my Django and open-source debugging skills while contributing a small, testable fix.
 
+Vikram Narayan, Precogly's project lead, and I are both active in the security community. That connection helped me choose a project whose mission I understood, but the contribution still followed the project's normal public issue-assignment, testing, CLA, and review process.
+
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/6017feca-0ae0-44ae-8344-7c69f0676f2c"
+    alt="Angelika S. with Precogly project lead Vikram Narayan"
+    width="1512"
+  />
+</p>
+
+<p align="center"><em>With Precogly project lead Vikram Narayan.</em></p>
+
 ## Scope Confirmation
 
 I introduced myself on Issue #203 and asked to work on it. Maintainer Vikram Narayan assigned the issue to me and clarified the scope:
@@ -46,6 +58,17 @@ Issue discussion: [precogly/precogly#203](https://github.com/precogly/precogly/i
 ---
 
 # Phase II — Environment, Reproduction, and Solution Plan
+
+## Phase II Evidence at a Glance
+
+| Rubric area | Evidence |
+|---|---|
+| Working branch | Fork and `branch-203` are linked at the top of this README. |
+| Environment | Docker setup, commands, three real problems, and their resolutions are documented below. |
+| Reproduction | Twelve numbered steps plus expected and actual behavior are included. |
+| Code-level investigation | React hooks, API endpoint, serializer, viewset, model, and exact functions are named. |
+| Solution plan | All six UMPIR sections are substantive and based on the confirmed root cause. |
+| Engineering judgment | A false lead is ruled out and the tenant-isolation risk is addressed proactively. |
 
 ## Environment Setup
 
@@ -183,6 +206,17 @@ The important debugging decision was to distinguish persistence from visibility.
 
 # Phase III — Implementation and Testing
 
+## Phase III Evidence at a Glance
+
+| Rubric area | Evidence |
+|---|---|
+| Implementation | Commit `d40e5e5`, exact file paths, focused diff, and queryset change are documented. |
+| New tests | Two API tests directly exercise the fixed path and cross-organization isolation. |
+| Existing suite | Full backend suite passed: `154 passed, 8 pre-existing warnings in 6.17s`. |
+| Project patterns | Tests use DRF `APITestCase`, authenticated clients, Django models, and existing naming conventions. |
+| Challenges | POST/GET mismatch, API casing, and pagination ordering are explained with resolutions. |
+| Testing notes | Focused, full-suite, static, and manual tests are documented separately. |
+
 ## Implementation
 
 Commit: [`d40e5e5 — fix: show data assets linked to threat-model flows`](https://github.com/angelikakasia/precogly/commit/d40e5e5918626963c509fd75e833a0afa8644c3b)
@@ -238,6 +272,22 @@ Result:
 
 The eight warnings are pre-existing `RemovedInDjango60Warning` messages from historical threat migration files that use the deprecated `CheckConstraint.check` argument. The warning caused by the new endpoint's unordered pagination was removed by ordering the queryset directly.
 
+## Full Backend Test Suite
+
+I also ran the complete backend test suite to check for regressions outside the focused endpoint:
+
+```bash
+docker compose exec -T backend pytest -q
+```
+
+Result:
+
+```text
+154 passed, 8 warnings in 6.17s
+```
+
+All existing backend tests passed. The eight warnings are the same pre-existing Django 6.0 deprecation warnings from historical migration files described above; no test failed because of this change.
+
 ## Static Checks
 
 The following checks passed:
@@ -286,6 +336,17 @@ The smallest correct fix was one authorization-query change rather than a fronte
 ---
 
 # Phase IV — Pull Request, Review, and Reflection
+
+## Phase IV Evidence at a Glance
+
+| Rubric area | Evidence |
+|---|---|
+| Upstream PR | PR #327 is open, not draft, from the fork to upstream `main`. |
+| Issue reference | The description uses `Closes #203`. |
+| PR quality | Root cause appears before implementation details, followed by tests and acceptance criteria. |
+| Evidence | The issue supplies before-fix evidence; the final after-refresh screenshot must be embedded below. |
+| README status | PR link, summary, CLA state, test state, and review state are recorded. |
+| Reflection | Technical skills, judgment, challenges, improvements, and a broader takeaway are included. |
 
 ## Pull Request
 
@@ -359,7 +420,7 @@ The fix is implemented, pushed, tested, and submitted upstream in PR #327. The C
 # CodePath Submission Checklist
 
 - [ ] Upload the final after-refresh screenshot to this README and PR #327.
-- [ ] Run the full backend suite if time permits and add the result: `docker compose exec -T backend pytest -q`.
+- [x] Run the full backend suite: `154 passed, 8 pre-existing warnings in 6.17s`.
 - [ ] Submit the Phase II check-in and mark Phase II complete.
 - [ ] Submit the Phase III check-in and mark Phase III complete.
 - [ ] Submit the Phase IV check-in and mark Phase IV complete.
@@ -377,12 +438,3 @@ The fix is implemented, pushed, tested, and submitted upstream in PR #327. The C
 - [Precogly contributing guide](https://github.com/precogly/precogly/blob/main/CONTRIBUTING.md)
 - [Precogly coding standards](https://github.com/precogly/precogly/blob/main/CODING_STANDARDS.md)
 - Django REST Framework API tests and queryset patterns already present in the repository
-
-  Vikram and I:
-<p align="center">
-  <img
-    src="https://github.com/user-attachments/assets/6017feca-0ae0-44ae-8344-7c69f0676f2c"
-    alt="Image"
-    width="1512"
-  />
-</p>
