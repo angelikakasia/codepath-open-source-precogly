@@ -379,4 +379,10 @@ The fix is implemented, pushed, tested, and submitted upstream in PR #327. The C
 - Django REST Framework API tests and queryset patterns already present in the repository
 
   Vikram and I:
-  <img width="512" height="1016" alt="Image" src="https://github.com/user-attachments/assets/6017feca-0ae0-44ae-8344-7c69f0676f2c" />
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/6017feca-0ae0-44ae-8344-7c69f0676f2c"
+    alt="Image"
+    width="1512"
+  />
+</p>
