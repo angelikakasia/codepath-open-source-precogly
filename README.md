@@ -419,14 +419,14 @@ The fix is implemented, pushed, tested, and submitted upstream in PR #327. The C
 
 # CodePath Submission Checklist
 
-- [ ] Upload the final after-refresh screenshot to this README and PR #327.
+
 - [x] Run the full backend suite: `154 passed, 8 pre-existing warnings in 6.17s`.
-- [ ] Submit the Phase II check-in and mark Phase II complete.
-- [ ] Submit the Phase III check-in and mark Phase III complete.
-- [ ] Submit the Phase IV check-in and mark Phase IV complete.
-- [ ] Paste this GitHub README URL into the CodePath portal.
-- [ ] Add any required Slack participation links or screenshots.
-- [ ] Ask the maintainer to approve the first-contributor workflow and review PR #327.
+- [x] Submit the Phase II check-in and mark Phase II complete.
+- [x] Submit the Phase III check-in and mark Phase III complete.
+- [x] Submit the Phase IV check-in and mark Phase IV complete.
+- [x] Paste this GitHub README URL into the CodePath portal.
+- [x] Add any required Slack participation links or screenshots.
+- [x] Ask the maintainer to approve the first-contributor workflow and review PR #327.
 - [ ] Record maintainer feedback and response commits in the feedback log when received.
 - [ ] Update the final PR status after CI, review, or merge.
 
