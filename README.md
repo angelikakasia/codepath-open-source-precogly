@@ -343,7 +343,7 @@ The smallest correct fix was one authorization-query change rather than a fronte
 | Upstream PR | PR #327 is open, not draft, from the fork to upstream `main`. |
 | Issue reference | The description uses `Closes #203`. |
 | PR quality | Root cause appears before implementation details, followed by tests and acceptance criteria. |
-| Evidence | The issue supplies before-fix evidence; the final after-refresh screenshot must be embedded below. |
+| Evidence | Issue #203 supplies before-fix evidence; focused tests, the full backend suite, and documented manual refresh testing confirm the fix. |
 | README status | PR link, summary, CLA state, test state, and review state are recorded. |
 | Reflection | Technical skills, judgment, challenges, improvements, and a broader takeaway are included. |
 
@@ -377,6 +377,22 @@ The fix updates the backend ownership filter to recognize both valid component o
 - Focused tests: 2 passed
 - Full backend suite: 154 passed
 - 8 pre-existing Django migration deprecation warnings
+
+  
+## Before and After Evidence
+
+**Before:** Selecting a Data Asset did not attach it to the Data Flow.
+
+<img width="554" height="533" alt="Data Asset linking before the fix" src="https://github.com/user-attachments/assets/6947e80a-f8b7-40fe-98d6-c071da03abe9" />
+
+<img width="301" height="318" alt="Linked asset missing before the fix" src="https://github.com/user-attachments/assets/0a1911a6-a44f-40cf-836c-674f69440656" />
+
+**After:** The Data Assets attach successfully and remain visible after refreshing the page.
+
+<img width="401" height="363" alt="Data Assets linked after the fix" src="https://github.com/user-attachments/assets/f2c155ec-4b72-4b0c-978c-81cc260412a8" />
+
+<img width="338" height="446" alt="Linked Data Assets persisted after refresh" src="https://github.com/user-attachments/assets/d73eefc8-c44a-4f7e-9a27-6dd2a4c1f98d" />
+
 
 ## Learnings and Reflections
 
@@ -416,8 +432,8 @@ The fix is implemented, pushed, tested, and submitted upstream in PR #327. The C
 - [x] Paste this GitHub README URL into the CodePath portal.
 - [x] Add any required Slack participation links or screenshots.
 - [x] Ask the maintainer to approve the first-contributor workflow and review PR #327.
-- [ ] Record maintainer feedback and response commits in the feedback log when received.
-- [ ] Update the final PR status after CI, review, or merge.
+
+**Maintainer status:** Awaiting workflow approval and initial review. No maintainer feedback has been received yet.
 
 ## Resources Used
 
