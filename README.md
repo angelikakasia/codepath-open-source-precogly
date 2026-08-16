@@ -313,7 +313,6 @@ I tested the fix in the authenticated DFD Editor using the `PASTA` Threat Model 
 
 Manual result: linking, display, multiple associations, protection updates, duplicate prevention, and refresh persistence all passed.
 
-After-fix evidence: add the final after-refresh screenshot here after uploading it to this README or link to the image in [PR #327](https://github.com/precogly/precogly/pull/327).
 
 ## Challenges Faced During Implementation
 
@@ -365,29 +364,19 @@ Users could select a Data Asset for a Data Flow, but the linked record disappear
 
 The fix updates the backend ownership filter to recognize both valid component ownership paths and adds regression tests for the fixed behavior and cross-organization isolation. No frontend or Guest Editor changes were necessary.
 
-## Acceptance Criteria
+## Acceptance criteria
 
-- [x] An existing Data Asset can be linked to a Data Flow.
-- [x] The linked asset appears in the Data Flow properties panel.
-- [x] Multiple assets can be linked to the same flow.
-- [x] Linked assets remain visible after a full page refresh.
-- [x] Protection settings remain visible after a refresh.
-- [x] Already-linked assets are excluded from the selection list.
-- [x] Cross-organization associations remain hidden.
-- [x] Automated API regression tests pass.
-- [x] The authenticated DFD Editor/backend path is fixed without changing the Guest Editor.
+- [x] Data Assets can be linked to a Data Flow
+- [x] Linked assets remain visible after refresh
+- [x] Protection settings persist
+- [x] Cross-organization assets remain hidden
+- [x] Focused and full backend tests pass
 
-## Before and After Evidence
+## Testing
 
-**Before:** Issue #203 contains the original reproduction and image showing that the asset does not remain linked: [before-fix report](https://github.com/precogly/precogly/issues/203).
-
-**After:** Upload the final screenshot showing three assets after refresh here and to PR #327. Suggested caption: `After refresh: Customer Data, API Keys, and Employee Records remain linked with their protection settings.`
-
-## Maintainer Feedback Log
-
-| Date | Feedback | Response | Commit |
-|---|---|---|---|
-| Pending | PR is awaiting initial maintainer review. | I will record each requested change and my response here. | Pending |
+- Focused tests: 2 passed
+- Full backend suite: 154 passed
+- 8 pre-existing Django migration deprecation warnings
 
 ## Learnings and Reflections
 
